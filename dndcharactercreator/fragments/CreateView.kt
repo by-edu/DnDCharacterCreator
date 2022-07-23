@@ -15,4 +15,5 @@ class CreateView : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.create_view, container, false)
     }
+
 }

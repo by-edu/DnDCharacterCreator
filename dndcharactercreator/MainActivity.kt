@@ -12,16 +12,27 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var bottomNav : BottomNavigationView
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val createFragment : Fragment = CreateView()
         val listFragment: Fragment = ListView()
-
         setFragment(createFragment)
         bottomNav = findViewById(R.id.naviMenu) as BottomNavigationView
+
+
+
+
+
+
+
+
+
+
+
+
+
         bottomNav.setOnNavigationItemSelectedListener() {
             when(it.getItemId()){
                 R.id.navHome -> setFragment(createFragment)
