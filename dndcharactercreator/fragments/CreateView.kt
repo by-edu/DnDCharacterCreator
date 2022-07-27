@@ -1,12 +1,17 @@
 package edu.msudenver.dndcharactercreator.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import edu.msudenver.dndcharactercreator.R
+import java.io.File
+import kotlin.random.Random
 
 class CreateView : Fragment() {
 
@@ -77,15 +82,46 @@ class CreateView : Fragment() {
 
 
 
-        /*btnChangeIcon?.setOnClickListener{
+        btnChangeIcon?.setOnClickListener{
 
-            println("OH YEA!!!")
-            // this works!!!!!
+            getImageIntent()
 
-        }*/
+        }
+
+        btnGenerateStats?.setOnClickListener{
+            generateStats()
+        }
 
 
 
     }
+
+    fun generateStats () {
+
+        var statRolls = List(5) { Random.nextInt(3, 19)}
+
+        txtStrStat?.text = statRolls.get(0).toString()
+        txtDexStat?.text = statRolls.get(1).toString()
+        txtConStat?.text = statRolls.get(2).toString()
+        txtIntStat?.text = statRolls.get(3).toString()
+        txtWisStat?.text = statRolls.get(4).toString()
+        //println(statRolls)
+
+    }
+
+    fun getImageIntent(){
+
+       val pickPhoto : Intent = Intent(Intent.ACTION_PICK)
+        val picDirectory : File = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+        val path = picDirectory.path
+        val data : Uri = Uri.parse(path)
+
+        pickPhoto.setDataAndType(data, "image/*")
+        startActivity(pickPhoto)
+
+
+    }
+
+
 
 }
