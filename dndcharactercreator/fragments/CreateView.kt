@@ -83,16 +83,12 @@ class CreateView : Fragment() {
 
 
         btnChangeIcon?.setOnClickListener{
-
-            getImageIntent()
-
+            getImage()
         }
 
         btnGenerateStats?.setOnClickListener{
             generateStats()
         }
-
-
 
     }
 
@@ -109,7 +105,7 @@ class CreateView : Fragment() {
 
     }
 
-    fun getImageIntent(){
+    fun getImage(){
 
        val pickPhoto : Intent = Intent(Intent.ACTION_PICK)
         val picDirectory : File = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
@@ -117,11 +113,19 @@ class CreateView : Fragment() {
         val data : Uri = Uri.parse(path)
 
         pickPhoto.setDataAndType(data, "image/*")
-        startActivity(pickPhoto)
+        //pickPhoto.getStringExtra("image")
+        startActivityForResult(pickPhoto, 1)
 
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1){
+            val image = data?.data
+            imgIcon?.setImageURI(image)
+        }
 
+    }
 
 }
