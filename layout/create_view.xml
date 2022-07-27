@@ -19,7 +19,7 @@
                 android:layout_gravity="left">
 
                 <ImageView
-                    android:id="@+id/imgCharImage"
+                    android:id="@+id/imgIcon"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:src="@drawable/man"
@@ -46,7 +46,7 @@
                     android:text="Name"/>
 
                 <EditText
-                    android:id="@+id/txtCharName"
+                    android:id="@+id/txtName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -56,7 +56,7 @@
                     android:text="Race"/>
 
                 <Spinner
-                    android:id="@+id/spnCharRace"
+                    android:id="@+id/spnRace"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -65,7 +65,7 @@
                     android:text="Class"/>
 
                 <Spinner
-                    android:id="@+id/spnCharClass"
+                    android:id="@+id/spnClass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -74,7 +74,7 @@
                     android:text="Background"/>
 
                 <Spinner
-                    android:id="@+id/spnCharBackground"
+                    android:id="@+id/spnBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -210,6 +210,7 @@
                 android:text="Proficiencies and Languages"/>
 
             <EditText
+                android:id="@+id/txtLangAndProf"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
@@ -233,6 +234,7 @@
                 android:text="Features"/>
 
             <EditText
+                android:id="@+id/txtFeatures"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
@@ -249,6 +251,7 @@
                 android:text="Character Bio"/>
 
             <EditText
+                android:id="@+id/txtCharBio"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
