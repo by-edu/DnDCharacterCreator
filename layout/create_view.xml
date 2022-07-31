@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_height="wrap_content"
@@ -22,8 +22,6 @@
                     android:id="@+id/imgIcon"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
-                    android:src="@drawable/man"
-
                     />
 
                 <Button
@@ -55,8 +53,8 @@
                     android:layout_width="wrap_content"
                     android:text="Race"/>
 
-                <Spinner
-                    android:id="@+id/spnRace"
+                <EditText
+                    android:id="@+id/txtRace"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -64,8 +62,8 @@
                     android:layout_width="wrap_content"
                     android:text="Class"/>
 
-                <Spinner
-                    android:id="@+id/spnClass"
+                <EditText
+                    android:id="@+id/txtClass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -73,8 +71,8 @@
                     android:layout_width="wrap_content"
                     android:text="Background"/>
 
-                <Spinner
-                    android:id="@+id/spnBackground"
+                <EditText
+                    android:id="@+id/txtBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -105,7 +103,7 @@
                     android:id="@+id/txtStrStat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NUMBER"/>
+                    android:text="-"/>
 
             </LinearLayout>
 
@@ -124,7 +122,7 @@
                     android:id="@+id/txtDexStat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NUMBER"/>
+                    android:text="-"/>
 
 
             </LinearLayout>
@@ -140,11 +138,12 @@
                     android:layout_height="wrap_content"
                     android:text="Constitution: "
                     />
+
                 <TextView
                     android:id="@+id/txtConStat"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="NUMBER"/>
+                    android:layout_height="match_parent"
+                    android:text="-" />
 
 
             </LinearLayout>
@@ -164,7 +163,7 @@
                     android:id="@+id/txtIntStat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NUMBER"/>
+                    android:text="-"/>
 
 
             </LinearLayout>
@@ -184,7 +183,7 @@
                     android:id="@+id/txtWisStat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="NUMBER"/>
+                    android:text="-"/>
 
 
             </LinearLayout>
@@ -254,6 +253,17 @@
                 android:id="@+id/txtCharBio"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
+
+            <Button
+                android:id="@+id/btnSaveChar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save Character"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+
 
         </LinearLayout>
 

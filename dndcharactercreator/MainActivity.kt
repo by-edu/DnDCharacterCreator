@@ -22,17 +22,6 @@ class MainActivity : AppCompatActivity() {
         bottomNav = findViewById(R.id.naviMenu) as BottomNavigationView
 
 
-
-
-
-
-
-
-
-
-
-
-
         bottomNav.setOnNavigationItemSelectedListener() {
             when(it.getItemId()){
                 R.id.navHome -> setFragment(createFragment)

@@ -7,7 +7,10 @@ import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import edu.msudenver.dndcharactercreator.R
 import java.io.File
@@ -23,9 +26,9 @@ class CreateView : Fragment() {
     // this button needs to be created first
 
     var txtName : EditText? = null
-    var spnRace : Spinner? = null // a spinner maybe
-    var spnClass : Spinner? = null // a spinner maybe
-    var spnBackground : Spinner? = null // a spinner maybe
+    var txtRace : EditText? = null // a spinner maybe
+    var txtClass : EditText? = null // a spinner maybe
+    var txtBackground : EditText? = null // a spinner maybe
     var txtLangAndProf : EditText? = null
     var txtFeatures : EditText? = null
     var txtCharBio : EditText? = null
@@ -35,6 +38,8 @@ class CreateView : Fragment() {
     var txtConStat : TextView? = null
     var txtIntStat : TextView? = null
     var txtWisStat : TextView? = null
+
+    var imgUri : Uri? = null
 
 
 
@@ -61,13 +66,13 @@ class CreateView : Fragment() {
         // Initialize Buttons and ImageView
         btnChangeIcon = view.findViewById(R.id.btnChangeIcon)
         btnGenerateStats = view.findViewById(R.id.btnGenerateStats)
-        //btnSaveChar = view.findViewById(R.id.btnSaveChar)
+        btnSaveChar = view.findViewById(R.id.btnSaveChar)
 
         // Initialize Spinners and EditTexts
         txtName = view.findViewById(R.id.txtName)
-        spnRace = view.findViewById(R.id.spnRace)
-        spnClass = view.findViewById(R.id.spnClass)
-        spnBackground = view.findViewById(R.id.spnBackground)
+        txtRace = view.findViewById(R.id.txtRace)
+        txtClass = view.findViewById(R.id.txtClass)
+        txtBackground = view.findViewById(R.id.txtBackground)
         txtLangAndProf = view.findViewById(R.id.txtLangAndProf)
         txtFeatures = view.findViewById(R.id.txtFeatures)
         txtCharBio = view.findViewById(R.id.txtCharBio)
@@ -90,9 +95,15 @@ class CreateView : Fragment() {
             generateStats()
         }
 
+        btnSaveChar?.setOnClickListener{
+
+
+
+        }
+
     }
 
-    fun generateStats () {
+    fun generateStats() {
 
         var statRolls = List(5) { Random.nextInt(3, 19)}
 
@@ -105,12 +116,57 @@ class CreateView : Fragment() {
 
     }
 
-    fun getImage(){
+    fun saveCharacter() {
+
+        /*val name = txtName?.text.toString()
+        val race = txtRace?.text.toString()
+        val jobclass = txtClass?.text.toString()
+        val background = txtBackground?.text.toString()
+
+        val statStr = txtStrStat?.text.toString()
+        val statDex = txtDexStat?.text.toString()
+        val statCon = txtConStat?.text.toString()
+        val statInt = txtIntStat?.text.toString()
+        val statWis = txtWisStat?.text.toString()
+
+        val profAndLang = txtLangAndProf?.text.toString()
+        val features = txtFeatures?.text.toString()
+        val bio = txtCharBio?.text.toString()*/
+
+        val extras : Bundle? = null
+        extras?.putString("name", txtName?.text.toString())
+        extras?.putString("race", txtRace?.text.toString())
+        extras?.putString("jobclass", txtClass?.text.toString())
+        extras?.putString("background", txtBackground?.text.toString())
+
+        extras?.putString("statStr", txtStrStat?.text.toString())
+        extras?.putString("statDex", txtDexStat?.text.toString())
+        extras?.putString("statCon", txtConStat?.text.toString())
+        extras?.putString("statInt", txtIntStat?.text.toString())
+        extras?.putString("statWis", txtWisStat?.text.toString())
+
+        extras?.putString("langAndProf", txtLangAndProf?.text.toString())
+        extras?.putString("features", txtFeatures?.text.toString())
+        extras?.putString("bio", txtCharBio?.text.toString())
+
+
+        val intent = Intent(activity, ListView::class.java)
+        if (extras != null) {
+            intent.putExtras(extras)
+            intent.putExtra("uri", imgUri)
+        }
+        startActivity(intent)
+    }
+
+
+    fun getImage() {
 
        val pickPhoto : Intent = Intent(Intent.ACTION_PICK)
         val picDirectory : File = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
         val path = picDirectory.path
         val data : Uri = Uri.parse(path)
+
+        imgUri = data
 
         pickPhoto.setDataAndType(data, "image/*")
         //pickPhoto.getStringExtra("image")
