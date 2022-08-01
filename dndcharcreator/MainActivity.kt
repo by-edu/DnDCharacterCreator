@@ -49,12 +49,12 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
     fun populateRecyclerView() {
 
         val db = dbHelper.readableDatabase
-        val scores = mutableListOf<Characters>()
+        val characters = mutableListOf<Characters>()
 
 
         /*db.execSQL(
             """
-            DROP TABLE IF EXISTS scores
+            DROP TABLE IF EXISTS characters
         """)
         dbHelper.onCreate(db)*/
         // To clear pesky tables!
@@ -78,11 +78,11 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
                 val value = getString(3).toString().toDouble()
 
                 val entry = Characters(id, date, level, value)
-                scores.add(entry)
+                characters.add(entry)
             }
         }
-        scores.sort()
-        recyclerView.adapter = ScoreAdapter(scores, this)
+        //characters.sort()
+        recyclerView.adapter = CharacterAdapter(characters, this)
 
     }
 
