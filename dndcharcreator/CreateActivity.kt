@@ -59,6 +59,7 @@ class CreateActivity : AppCompatActivity(){
 
         btnSaveCharacter?.setOnClickListener{
             createCharacter()
+            finish()
 
         }
 

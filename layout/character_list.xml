@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/imgPane"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,19 +31,19 @@
             android:textSize="20dp"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtRace"
             android:textSize="20dp"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtJobClass"
             android:textSize="20dp"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtBackground"
             android:textSize="20dp"/>
