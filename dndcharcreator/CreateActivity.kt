@@ -98,18 +98,22 @@ class CreateActivity : AppCompatActivity(){
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == 1){
             val image = data?.data
-            //imgIcon?.setImageURI(image)
+            imgIcon?.setImageURI(image)
+
+            stringUri = image.toString()
 
             //val imageStream: InputStream = getContentResolver().openInputStream(image)
             val imageStream: InputStream? = image?.let { getContentResolver().openInputStream(it) }
             val inputData : ByteArray? = imageStream?.readBytes()
 
-            println("Raw Byte array: $inputData")
+            println("URI: $image")
+
+            /*println("Raw Byte array: $inputData")
 
             imgBytes = inputData
 
             val imgBitMap = BitmapFactory.decodeByteArray(inputData, 0, inputData!!.size)
-            imgIcon?.setImageBitmap(imgBitMap)
+            imgIcon?.setImageBitmap(imgBitMap)*/
 
         }
     }
@@ -133,7 +137,7 @@ class CreateActivity : AppCompatActivity(){
             db.execSQL(
                 """
                             INSERT INTO characters VALUES
-                                ("${imgBytes.toString()}", "${name}","${race}","${jobClass}","${background}","${langAndProf}","${features}","${bio}","${statStr}","${statDex}","${statCon}","${statInt}","${statWis}")
+                                ("${stringUri}", "${name}","${race}","${jobClass}","${background}","${langAndProf}","${features}","${bio}","${statStr}","${statDex}","${statCon}","${statInt}","${statWis}")
                         """)
 
         } catch (ex: Exception){

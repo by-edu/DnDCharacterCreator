@@ -5,7 +5,7 @@ import java.util.*
 
 class Characters(
     var id: Int,
-    var imgByteArray : ByteArray,
+    var imgUri : String,
     var name : String,
     var race : String,
     var jobClass: String,
