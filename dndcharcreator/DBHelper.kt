@@ -18,15 +18,26 @@ class DBHelper (context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null
         // create the table
         db?.execSQL("""
             CREATE TABLE characters ( 
-                date     TEXT NOT NULL, 
-                level    INTEGER NOT NULL,
-                value    DOUBLE NOT NULL)
+                uri     TEXT NOT NULL, 
+                name    TEXT NOT NULL,
+                race    TEXT NOT NULL,
+                jobclass    TEXT NOT NULL,
+                background    TEXT NOT NULL,
+                langandprof TEXT NOT NULL,
+                features TEXT NOT NULL,
+                bio TEXT NOT NULL,
+                statstr INTEGER NOT NULL,
+                statdex INTEGER NOT NULL,
+                statcon INTEGER NOT NULL,
+                statint INTEGER NOT NULL,
+                statwis INTEGER NOT NULL
+)
         """)
 
         /*
         db?.execSQL("""
             INSERT INTO characters VALUES
-                ("2022-07-20", 0, .5)
+                ("uri", "name", ....... , 17, .....)
         """)*/
     }
 

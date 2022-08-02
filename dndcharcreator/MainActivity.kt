@@ -1,6 +1,7 @@
 package edu.msudenver.dndcharcreator
 
 import android.content.DialogInterface
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity(), View.OnLongClickListener {
@@ -38,7 +40,13 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
         override fun onBindViewHolder(holder: CharacterHolder, position: Int) {
             val entry = characters[position]
 
-            holder.txtId.text = entry.toString()
+            holder.txtId.text = (entry.id.toString().toInt()).toString()
+            holder.imgPane.setImageURI(Uri.parse(entry.imgUri.toString()))
+            // Check this one to see if it works
+            holder.txtName.text = "Name: ${entry.name.toString()}"
+            holder.txtRace.text = "Race: ${entry.race.toString()}"
+            holder.txtJobClass.text = "Class: ${entry.jobClass.toString()}"
+            holder.txtBackground.text = "Background: ${entry.background.toString()}"
         }
 
         override fun getItemCount(): Int {
@@ -61,7 +69,7 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
 
         val cursor = db.query(
             "characters",
-            arrayOf("rowid, date, level, value"),
+            arrayOf("rowid, uri, name, race, jobclass, background, langandprof, features, bio, statstr, statdex, statcon, statint, statwis"),
             null,
             null,
             null,
@@ -73,11 +81,22 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
 
 
                 val id = getInt(0)
-                val date    = DBHelper.ISO_FORMAT.parse(getString(1))
-                val level = getString(2).toString().toInt()
-                val value = getString(3).toString().toDouble()
+                val uri = Uri.parse(getString(1))
+                val name = getString(2).toString()
+                val race = getString(3).toString()
+                val jobClass = getString(4).toString()
+                val background = getString(5).toString()
+                val langAndProf = getString(6).toString()
+                val features = getString(7).toString()
+                val bio = getString(8).toString()
+                val statStr = getString(9).toString().toInt()
+                val statDex = getString(10).toString().toInt()
+                val statCon = getString(11).toString().toInt()
+                val statInt = getString(12).toString().toInt()
+                val statWis = getString(13).toString().toInt()
 
-                val entry = Characters(id, date, level, value)
+
+                val entry = Characters(id, uri, name, race, jobClass, background)
                 characters.add(entry)
             }
         }
