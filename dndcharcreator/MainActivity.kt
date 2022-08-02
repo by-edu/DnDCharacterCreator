@@ -1,16 +1,19 @@
 package edu.msudenver.dndcharcreator
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity(), View.OnLongClickListener {
@@ -96,7 +99,8 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
                 val statWis = getString(13).toString().toInt()
 
 
-                val entry = Characters(id, uri, name, race, jobClass, background)
+                val entry = Characters(id, uri, name, race, jobClass, background,
+                    langAndProf, features, bio, statStr, statDex, statCon, statInt, statWis)
                 characters.add(entry)
             }
         }
@@ -110,12 +114,17 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //dbHelper = DBHelper(this)
-
-        //recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        //recyclerView.layoutManager = LinearLayoutManager(this)
+        dbHelper = DBHelper(this)
+        recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         populateRecyclerView()
+
+        val btnCreate : Button = findViewById(R.id.btnCreate)
+        btnCreate.setOnClickListener{
+            val intent = Intent(this, CreateActivity::class.java)
+            startActivity(intent)
+        }
 
 
         // TODOd #5: initialize the floating action button
@@ -156,7 +165,7 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
         if (view != null) {
             val id = view.findViewById<TextView>(R.id.txtId).text.toString().toInt()
             val alertDialogBuilder = AlertDialog.Builder(this)
-            alertDialogBuilder.setMessage("Are you sure you want to delete this score?")
+            alertDialogBuilder.setMessage("Delete this character permanently?")
             alertDialogBuilder.setPositiveButton("Yes", MyDialogInterfaceListener(id))
             alertDialogBuilder.setNegativeButton("No", MyDialogInterfaceListener(id))
             alertDialogBuilder.show()
