@@ -2,6 +2,7 @@ package edu.msudenver.dndcharcreator
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,7 +13,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.core.net.toUri
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -43,13 +44,17 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
         override fun onBindViewHolder(holder: CharacterHolder, position: Int) {
             val entry = characters[position]
 
+            println("Icon bytearray: ${entry.imgByteArray}")
+
             holder.txtId.text = (entry.id.toString().toInt()).toString()
-            holder.imgPane.setImageURI(Uri.parse(entry.imgUri.toString()))
+            holder.imgPane.setImageBitmap(BitmapFactory.decodeByteArray(entry.imgByteArray, 0 , entry.imgByteArray.size))
             // Check this one to see if it works
             holder.txtName.text = "Name: ${entry.name.toString()}"
             holder.txtRace.text = "Race: ${entry.race.toString()}"
             holder.txtJobClass.text = "Class: ${entry.jobClass.toString()}"
             holder.txtBackground.text = "Background: ${entry.background.toString()}"
+
+            holder.itemView.setOnLongClickListener(onLongClickListener)
         }
 
         override fun getItemCount(): Int {
@@ -84,7 +89,7 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
 
 
                 val id = getInt(0)
-                val uri = Uri.parse(getString(1))
+                val imgBitMap = getString(1).toByteArray()
                 val name = getString(2).toString()
                 val race = getString(3).toString()
                 val jobClass = getString(4).toString()
@@ -99,7 +104,7 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
                 val statWis = getString(13).toString().toInt()
 
 
-                val entry = Characters(id, uri, name, race, jobClass, background,
+                val entry = Characters(id, imgBitMap, name, race, jobClass, background,
                     langAndProf, features, bio, statStr, statDex, statCon, statInt, statWis)
                 characters.add(entry)
             }

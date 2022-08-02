@@ -2,6 +2,7 @@ package edu.msudenver.dndcharcreator
 
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -11,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.io.File
+import java.io.InputStream
 import java.lang.Exception
 import kotlin.random.Random
 
@@ -27,6 +29,7 @@ class CreateActivity : AppCompatActivity(){
     var txtIntStat : TextView? = null
     var txtWisStat : TextView? = null
     var stringUri : String? = null
+    var imgBytes : ByteArray? = null
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -95,7 +98,19 @@ class CreateActivity : AppCompatActivity(){
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == 1){
             val image = data?.data
-            imgIcon?.setImageURI(image)
+            //imgIcon?.setImageURI(image)
+
+            //val imageStream: InputStream = getContentResolver().openInputStream(image)
+            val imageStream: InputStream? = image?.let { getContentResolver().openInputStream(it) }
+            val inputData : ByteArray? = imageStream?.readBytes()
+
+            println("Raw Byte array: $inputData")
+
+            imgBytes = inputData
+
+            val imgBitMap = BitmapFactory.decodeByteArray(inputData, 0, inputData!!.size)
+            imgIcon?.setImageBitmap(imgBitMap)
+
         }
     }
 
@@ -118,7 +133,7 @@ class CreateActivity : AppCompatActivity(){
             db.execSQL(
                 """
                             INSERT INTO characters VALUES
-                                ("${stringUri}", "${name}","${race}","${jobClass}","${background}","${langAndProf}","${features}","${bio}","${statStr}","${statDex}","${statCon}","${statInt}","${statWis}")
+                                ("${imgBytes.toString()}", "${name}","${race}","${jobClass}","${background}","${langAndProf}","${features}","${bio}","${statStr}","${statDex}","${statCon}","${statInt}","${statWis}")
                         """)
 
         } catch (ex: Exception){
