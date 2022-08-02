@@ -6,10 +6,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.io.File
+import java.lang.Exception
 import kotlin.random.Random
 
 class CreateActivity : AppCompatActivity(){
@@ -56,6 +58,7 @@ class CreateActivity : AppCompatActivity(){
         }
 
         btnSaveCharacter?.setOnClickListener{
+            createCharacter()
 
         }
 
@@ -93,6 +96,34 @@ class CreateActivity : AppCompatActivity(){
             val image = data?.data
             imgIcon?.setImageURI(image)
         }
+    }
+
+    fun createCharacter() {
+
+        val name = findViewById<EditText>(R.id.txtName).text.toString()
+        val race = findViewById<EditText>(R.id.txtRace).text.toString()
+        val jobClass = findViewById<EditText>(R.id.txtClass).text.toString()
+        val background = findViewById<EditText>(R.id.txtBackground).text.toString()
+        val langAndProf = findViewById<EditText>(R.id.txtLangAndProf).text.toString()
+        val features = findViewById<EditText>(R.id.txtFeatures).text.toString()
+        val bio = findViewById<EditText>(R.id.txtCharBio).text.toString()
+        val statStr = findViewById<TextView>(R.id.txtStrStat).text.toString().toInt()
+        val statDex = findViewById<TextView>(R.id.txtDexStat).text.toString().toInt()
+        val statCon = findViewById<TextView>(R.id.txtConStat).text.toString().toInt()
+        val statInt = findViewById<TextView>(R.id.txtIntStat).text.toString().toInt()
+        val statWis = findViewById<TextView>(R.id.txtWisStat).text.toString().toInt()
+
+        try{
+            db.execSQL(
+                """
+                            INSERT INTO characters VALUES
+                                ("${stringUri}", "${name}","${race}","${jobClass}","${background}","${langAndProf}","${features}","${bio}","${statStr}","${statDex}","${statCon}","${statInt}","${statWis}")
+                        """)
+
+        } catch (ex: Exception){
+
+        }
+
     }
 
 }
