@@ -187,6 +187,26 @@
 
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Charisma: "
+                    />
+                <TextView
+                    android:id="@+id/txtChaStat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"/>
+
+
+            </LinearLayout>
             <Button
                 android:id="@+id/btnGenerateStats"
                 android:layout_width="match_parent"

@@ -24,7 +24,8 @@ class Characters(
     var statDex: Int,
     var statCon: Int,
     var statInt: Int,
-    var statWis: Int): Comparable<Characters> {
+    var statWis: Int,
+    var statCha: Int): Comparable<Characters> {
     override fun compareTo(other: Characters): Int {
         if(id == other.id)
             return other.id.compareTo(id)

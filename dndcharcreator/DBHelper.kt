@@ -36,8 +36,8 @@ class DBHelper (context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null
                 statdex INTEGER NOT NULL,
                 statcon INTEGER NOT NULL,
                 statint INTEGER NOT NULL,
-                statwis INTEGER NOT NULL
-)
+                statwis INTEGER NOT NULL,
+                statcha INTEGER NOT NULL)
         """)
 
         /*
@@ -48,12 +48,12 @@ class DBHelper (context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        // drop the table
+
         db?.execSQL("""
             DROP TABLE IF EXISTS characters
         """)
 
-        // then call "onCreate" again
+
         onCreate(db)
     }
 }
