@@ -4,6 +4,7 @@ import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.widget.Button
@@ -15,6 +16,13 @@ import java.io.File
 import java.io.InputStream
 import java.lang.Exception
 import kotlin.random.Random
+
+/*
+* CS3013 - Mobile App Dev. - Summer 2022
+* Instructor: Thyago Mota
+* Student(s): Brandon Young, Anna Watson, Kathryn Werner
+* Description: Character Creation Activity
+*/
 
 class CreateActivity : AppCompatActivity(){
 
@@ -81,7 +89,8 @@ class CreateActivity : AppCompatActivity(){
     }
 
     fun getImage(){
-        val pickPhoto : Intent = Intent(Intent.ACTION_PICK)
+        val pickPhoto : Intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+
         val picDirectory : File = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
         val path = picDirectory.path
         val data : Uri = Uri.parse(path)
@@ -107,10 +116,18 @@ class CreateActivity : AppCompatActivity(){
             val inputData : ByteArray? = imageStream?.readBytes()
 
             println("URI: $image")
+            //println("Raw Byte array: $inputData")
 
-            /*println("Raw Byte array: $inputData")
+            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2){
+                if (image != null) {
+                    getContentResolver().takePersistableUriPermission(image, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    getContentResolver().takePersistableUriPermission(image, Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                }
+            }
 
-            imgBytes = inputData
+
+
+            /*imgBytes = inputData
 
             val imgBitMap = BitmapFactory.decodeByteArray(inputData, 0, inputData!!.size)
             imgIcon?.setImageBitmap(imgBitMap)*/

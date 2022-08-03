@@ -3,9 +3,16 @@ package edu.msudenver.dndcharcreator
 import android.net.Uri
 import java.util.*
 
+/*
+* CS3013 - Mobile App Dev. - Summer 2022
+* Instructor: Thyago Mota
+* Student(s): Brandon Young, Anna Watson, Kathryn Werner
+* Description: Character Class
+*/
+
 class Characters(
     var id: Int,
-    var imgUri : String,
+    var uri : Uri,
     var name : String,
     var race : String,
     var jobClass: String,

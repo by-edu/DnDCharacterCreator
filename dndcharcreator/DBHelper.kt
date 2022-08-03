@@ -5,6 +5,12 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import java.io.Serializable
 
+/*
+* CS3013 - Mobile App Dev. - Summer 2022
+* Instructor: Thyago Mota
+* Student(s): Brandon Young, Anna Watson, Kathryn Werner
+* Description: Database Helper
+*/
 
 class DBHelper (context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION), Serializable {
 

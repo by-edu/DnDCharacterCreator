@@ -15,6 +15,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+/*
+* CS3013 - Mobile App Dev. - Summer 2022
+* Instructor: Thyago Mota
+* Student(s): Brandon Young, Anna Watson, Kathryn Werner
+* Description: Main Activity
+*/
+
 class MainActivity : AppCompatActivity(), View.OnLongClickListener {
 
     lateinit var recyclerView: RecyclerView
@@ -42,10 +49,14 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
         override fun onBindViewHolder(holder: CharacterHolder, position: Int) {
             val entry = characters[position]
 
-            println("Icon bytearray: ${entry.imgUri}")
+            //val imgBitMap = BitmapFactory.decodeByteArray(entry.imgByteString, 0, inputData!!.size)
+
+
+
+            println("Icon bytearray: ${entry.uri}")
 
             holder.txtId.text = (entry.id.toString().toInt()).toString()
-            holder.imgPane.setImageURI(Uri.parse(entry.imgUri))
+            holder.imgPane.setImageURI(Uri.parse(entry.uri.toString()))
             // Check this one to see if it works
             holder.txtName.text = "Name: ${entry.name.toString()}"
             holder.txtRace.text = "Race: ${entry.race.toString()}"
@@ -87,7 +98,7 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
 
 
                 val id = getInt(0)
-                val imgUri = getString(1)
+                val uri = Uri.parse(getString(1))
                 val name = getString(2).toString()
                 val race = getString(3).toString()
                 val jobClass = getString(4).toString()
@@ -102,7 +113,7 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
                 val statWis = getString(13).toString().toInt()
 
 
-                val entry = Characters(id, imgUri, name, race, jobClass, background,
+                val entry = Characters(id, uri, name, race, jobClass, background,
                     langAndProf, features, bio, statStr, statDex, statCon, statInt, statWis)
                 characters.add(entry)
             }
