@@ -49,15 +49,10 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
         override fun onBindViewHolder(holder: CharacterHolder, position: Int) {
             val entry = characters[position]
 
-            //val imgBitMap = BitmapFactory.decodeByteArray(entry.imgByteString, 0, inputData!!.size)
-
-
-
-            println("Icon bytearray: ${entry.uri}")
+            //println("Icon bytearray: ${entry.uri}")
 
             holder.txtId.text = (entry.id.toString().toInt()).toString()
             holder.imgPane.setImageURI(Uri.parse(entry.uri.toString()))
-            // Check this one to see if it works
             holder.txtName.text = "Name: ${entry.name.toString()}"
             holder.txtRace.text = "Race: ${entry.race.toString()}"
             holder.txtJobClass.text = "Class: ${entry.jobClass.toString()}"
@@ -156,6 +151,7 @@ class MainActivity : AppCompatActivity(), View.OnLongClickListener {
     }
 
     override fun onLongClick(view: View?): Boolean {
+
         class MyDialogInterfaceListener(val id: Int): DialogInterface.OnClickListener {
             override fun onClick(dialogInterface: DialogInterface?, which: Int) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
